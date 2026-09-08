@@ -1,0 +1,65 @@
+---
+import Logo from '../components/Logo.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, schema } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+const socialCard = Astro.site ? new URL('/social-card.svg', Astro.site).toString() : '/social-card.svg';
+---
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#183d38" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={socialCard} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HXM22WWPKP');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="logo-link" href="#inicio" aria-label="Ir al inicio"><Logo /></a>
+        <nav aria-label="Navegación principal">
+          <a href="#historia">Historia</a>
+          <a href="#visita">Visita</a>
+          <a href="#entorno">Entorno</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+    <main id="contenido"><slot /></main>
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <Logo compact={true} />
+        <p>Sitio informativo independiente y no oficial. No está afiliado al Gobierno de la Ciudad de México ni a Google.</p>
+      </div>
+    </footer>
+  </body>
+</html>

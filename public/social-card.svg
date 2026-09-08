@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#183d38"/>
+  <circle cx="905" cy="315" r="190" fill="none" stroke="#d7c19c" stroke-width="3" opacity=".55"/>
+  <circle cx="905" cy="270" r="50" fill="none" stroke="#d7c19c" stroke-width="3"/>
+  <path d="M790 435c32-50 70-75 115-75s83 25 115 75M755 475h300" fill="none" stroke="#d7c19c" stroke-width="3" stroke-linecap="round"/>
+  <text x="90" y="245" fill="#f6efe3" font-family="Georgia,serif" font-size="82">Fuente de</text>
+  <text x="90" y="345" fill="#dfc69c" font-family="Georgia,serif" font-size="108" font-style="italic">Cibeles</text>
+  <text x="95" y="410" fill="#f6efe3" opacity=".72" font-family="Arial,sans-serif" font-size="24" letter-spacing="6">ROMA NORTE · CIUDAD DE MÉXICO</text>
+</svg>
