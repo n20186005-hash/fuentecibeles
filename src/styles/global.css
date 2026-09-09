@@ -209,6 +209,9 @@ h2 { font: 400 clamp(2.5rem, 5.2vw, 5.2rem)/.98 var(--serif); letter-spacing: -.
   .fact-strip, .food-grid { grid-template-columns: repeat(2, 1fr); }
   .food-grid article:last-child { grid-column: span 2; }
   .image-card--tall, .image-card--heroish { min-height: 520px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer-brand { grid-column: span 2; }
+  .source-list li { grid-template-columns: 1fr; gap: .3rem; }
 }
 
 @media (max-width: 620px) {
@@ -232,8 +235,10 @@ h2 { font: 400 clamp(2.5rem, 5.2vw, 5.2rem)/.98 var(--serif); letter-spacing: -.
   .timeline article { grid-template-columns: 72px 1fr; }
   .parking-card { grid-template-columns: 1fr; padding: 1.4rem; }
   .stay-options article { grid-template-columns: 1fr; gap: .5rem; }
-  .footer-grid { flex-direction: column; align-items: flex-start; }
-  .footer-grid p { text-align: left; }
+  .crumb { margin-top: 0; padding-bottom: 1.6rem; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-brand { grid-column: auto; }
+  .footer-nav { grid-template-columns: 1fr 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

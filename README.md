@@ -1,6 +1,8 @@
-# Fuente de Cibeles — sitio Astro
+# Fuente de Cibeles — sitio Astro (fuentecibeles.com)
 
-Micrositio turístico en español para la Fuente de Cibeles, Roma Norte, Ciudad de México.
+Micrositio turístico en español para la Fuente de Cibeles (Plaza Villa de Madrid), Roma Norte, Ciudad de México.
+
+Sitio de una sola página con dominio configurado (`https://fuentecibeles.com`), diseñado como landing SEO de la entidad para vincular con su ficha de Google Maps.
 
 ## Stack fijado
 
@@ -19,12 +21,26 @@ Micrositio turístico en español para la Fuente de Cibeles, Roma Norte, Ciudad 
 El dominio se configura **sólo** en `astro.config.mjs`, variable `SITE`.
 
 ```js
-const SITE = '';
+const SITE = 'https://fuentecibeles.com';
 ```
 
-- Vacío: el proyecto debe construir sin canonical absoluto y sin sitemap.
-- Con dominio, por ejemplo `https://dominio.mx`: canonical, Open Graph, JSON-LD y sitemap derivan de `Astro.site`.
-- No uses dominios de ejemplo.
+- Con dominio: canonical, Open Graph, JSON-LD y sitemap derivan de `Astro.site`.
+- Dejar vacío permite construir el proyecto sin dominio (sin canonical absoluto ni sitemap).
+
+## SEO / entidad
+
+- TDK con «Fuente de Cibeles (Ciudad de México)», H1 con nombre oficial + plaza + ciudad y alt semántico en cada foto.
+- JSON-LD en `<head>`: `Organization`, `WebSite`, `WebPage`, `TouristAttraction` (con `@id`, `image`, `geo`, `hasMap`, `sameAs`, rating 4.6 · 22,693 y `isAccessibleForFree`), `BreadcrumbList` y `FAQPage`.
+- Breadcrumb visible (Inicio › Ciudad de México › CDMX › México › Fuente de Cibeles) y mapa de Google con el `src` de embed oficial.
+- Enlaces de autoridad .gob.mx (portal de turismo del Gobierno de la Ciudad de México).
+- La página se pre-renderiza (`prerender = true`) para que el sitemap incluya `/`.
+- `public/robots.txt` permite el rastreo y apunta al sitemap.
+
+## PWA
+
+- `public/manifest.webmanifest` (nombre, `start_url /`, `theme_color #183d38`, iconos 192/512/maskable).
+- `public/sw.js`: network-first en navegación con respaldo offline a `/`.
+- Iconos PNG generados desde `public/icons/favicon.svg` con `node scripts/prepare-assets.mjs`.
 
 ## Desarrollo
 
@@ -48,7 +64,9 @@ pnpm deploy
 
 Las fotografías son reales y proceden de Wikimedia Commons con licencia CC BY-SA 4.0. La atribución aparece junto a cada imagen y en `SOURCES.md`.
 
-Si el entorno tiene acceso a Internet, `pnpm media:fetch` guarda las cuatro imágenes en `public/images/` con nombres estables para poder sustituir los `src` remotos por rutas locales.
+- `pnpm media:fetch` descarga las cuatro imágenes originales en `public/images/`.
+- `pnpm prepare:assets` optimiza las fotografías (máx. 1600px, JPEG q82) y genera los iconos PNG del PWA.
+- El sitio sirve las imágenes desde `public/images/` (rutas locales) y declara `og:image` absoluto con la foto principal.
 
 ## GA4
 

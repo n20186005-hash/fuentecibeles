@@ -14,7 +14,8 @@
     "build": "astro build",
     "preview": "wrangler dev",
     "deploy": "pnpm build && wrangler deploy",
-    "media:fetch": "node scripts/fetch-media.mjs"
+    "media:fetch": "node scripts/fetch-media.mjs",
+    "prepare:assets": "node scripts/prepare-assets.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "14.3.0",
