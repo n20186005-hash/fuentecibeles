@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // ÚNICO PUNTO DE CONFIGURACIÓN DEL DOMINIO.
 // Dejar vacío permite construir el proyecto sin dominio.
-const SITE = '';
+const SITE = 'https://fuentecibeles.com';
 
 export default defineConfig({
   site: SITE || undefined,

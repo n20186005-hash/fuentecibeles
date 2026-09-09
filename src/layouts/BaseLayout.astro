@@ -1,17 +1,25 @@
 ---
 import Logo from '../components/Logo.astro';
+import { attraction } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
-const { title, description, schema } = Astro.props;
+const { title, description, schema, ogImage, ogImageAlt } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
 const socialCard = Astro.site ? new URL('/social-card.svg', Astro.site).toString() : '/social-card.svg';
+const defaultOgAlt = `${attraction.name} — Plaza Villa de Madrid, Roma Norte, Ciudad de México`;
+const ogImageUrl = ogImage ? (Astro.site ? new URL(ogImage, Astro.site).toString() : ogImage) : socialCard;
+const ogAlt = ogImageAlt ?? defaultOgAlt;
+const year = new Date().getFullYear();
 ---
+
 <!doctype html>
 <html lang="es-MX">
   <head>
@@ -21,18 +29,47 @@ const socialCard = Astro.site ? new URL('/social-card.svg', Astro.site).toString
     <meta name="description" content={description} />
     <title>{title}</title>
     {canonical && <link rel="canonical" href={canonical} />}
+
+    <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={attraction.formalName} />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
-    <meta property="og:image" content={socialCard} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="1200" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+
+    <!-- Icons -->
     <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Fuente de Cibeles" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+    <script is:inline>
+      if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
+        addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(function () {});
+        });
+      }
+    </script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -50,15 +87,44 @@ const socialCard = Astro.site ? new URL('/social-card.svg', Astro.site).toString
           <a href="#historia">Historia</a>
           <a href="#visita">Visita</a>
           <a href="#entorno">Entorno</a>
+          <a href="#fuentes">Fuentes</a>
           <a href="#faq">FAQ</a>
         </nav>
       </div>
     </header>
     <main id="contenido"><slot /></main>
     <footer class="site-footer">
-      <div class="shell footer-grid">
-        <Logo compact={true} />
-        <p>Sitio informativo independiente y no oficial. No está afiliado al Gobierno de la Ciudad de México ni a Google.</p>
+      <div class="shell">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <Logo compact={true} />
+            <p class="footer-formal">{attraction.formalName}</p>
+            <p class="footer-tag">
+              Guía turística independiente de la réplica madrileña en Roma Norte, Cuauhtémoc, Ciudad de México.
+            </p>
+          </div>
+          <nav class="footer-nav" aria-label="Enlaces del sitio">
+            <a href="#inicio">Inicio</a>
+            <a href="#historia">Historia</a>
+            <a href="#visita">Cómo visitar</a>
+            <a href="#entorno">Llegar y moverse</a>
+            <a href="#fuentes">Fuentes</a>
+            <a href="#faq">Preguntas frecuentes</a>
+          </nav>
+          <address class="footer-nap">
+            <strong>{attraction.name}</strong>
+            <span>{attraction.streetAddress}</span>
+            <span>{attraction.borough}, {attraction.postalCode} {attraction.city}, {attraction.regionShort}, México</span>
+            <span>Calificación Google Maps: {attraction.rating} / 5 ({attraction.reviewCount.toLocaleString('es-MX')} reseñas)</span>
+            <a class="text-link text-link--light" href={attraction.mapUrl} target="_blank" rel="noopener noreferrer">Abrir en Google Maps →</a>
+          </address>
+        </div>
+        <div class="footer-bottom">
+          <p>© {year} {attraction.formalName} — sitio informativo independiente y no oficial. No está afiliado al Gobierno de la Ciudad de México ni a Google.</p>
+          <p>
+            Todas las imágenes mostradas en este sitio web permanecen en propiedad de sus fotógrafos originales: la propiedad intelectual y los derechos de autor de cada fotografía corresponden a sus autores (Wikimedia Commons, CC BY-SA 4.0).
+          </p>
+        </div>
       </div>
     </footer>
   </body>
