@@ -47,7 +47,7 @@ export const attraction = {
   imagePath: '/images/fuente-cibeles-vista-general.jpg'
 } as const;
 
-export const photos: Photo[] = [
+export const photos: [Photo, Photo, Photo, Photo] = [
   {
     src: '/images/fuente-cibeles-vista-general.jpg',
     localName: 'fuente-cibeles-vista-general.jpg',
