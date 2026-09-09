@@ -7,7 +7,6 @@ export const prerender = true;
 const title = 'Fuente de Cibeles (Ciudad de México): guía de visita, historia y mapa';
 const description =
   'Guía para visitar la Fuente de Cibeles, la réplica madrileña de la Plaza Villa de Madrid en Roma Norte, Cuauhtémoc, Ciudad de México: historia, arquitectura, cómo llegar, mapa y lugares cercanos.';
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
 const siteUrl = Astro.site ? new URL('/', Astro.site).toString() : undefined;
 const origin = Astro.site ? Astro.site.origin : undefined;
 const heroImageUrl = origin ? new URL(attraction.imagePath, origin).toString() : attraction.imagePath;

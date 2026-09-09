@@ -60,7 +60,7 @@ const year = new Date().getFullYear();
     <meta name="apple-mobile-web-app-title" content="Fuente de Cibeles" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)}></script>}
 
     <script is:inline>
       if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname))) {
@@ -70,7 +70,7 @@ const year = new Date().getFullYear();
       }
     </script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
