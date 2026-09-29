@@ -29,12 +29,36 @@ const SITE = 'https://fuentecibeles.com';
 
 ## SEO / entidad
 
-- TDK con «Fuente de Cibeles (Ciudad de México)», H1 con nombre oficial + plaza + ciudad y alt semántico en cada foto.
-- JSON-LD en `<head>`: `Organization`, `WebSite`, `WebPage`, `TouristAttraction` (con `@id`, `image`, `geo`, `hasMap`, `sameAs`, rating 4.6 · 22,693 y `isAccessibleForFree`), `BreadcrumbList` y `FAQPage`.
+- Nombre del sitio centralizado en `src/data/site.ts`: `SITE_NAME` = «Fuente de Cibeles Ciudad de México — Guía turística»
+  (formato atractivo + ciudad + guía). Es la fuente única de `og:site_name` y de `withSiteName()` para páginas futuras.
+- TDK orientado a intención: `<title>` con «Fuente de Cibeles CDMX: historia, cómo llegar y mapa» y metadescripción con
+  historia de la réplica, ubicación exacta, Metro/Metrobús, fotos y alrededores.
+- Secciones con ancla propia: `#inicio`, `#historia`, `#visita`, `#fotos` (galería de 4 fotos), `#como-llegar`
+  (Metro Línea 1, Metrobús Durango, ECOBICI, Turibus + rutas paso a paso), mapa de ubicación, `#fuentes` y `#faq`.
+- JSON-LD en `<head>`: `Organization`, `WebSite`, `WebPage`, `TouristAttraction` + `LandmarksOrHistoricalBuildings`
+  (con `@id`, `image` como `ImageObject`, `address`, `geo`, `hasMap`, `sameAs` .gob.mx, `openingHoursSpecification`,
+  rating 4.6 · 22,741 y `isAccessibleForFree` / `publicAccess`), `BreadcrumbList` y `FAQPage` (12 preguntas).
+- FAQ escritas para consultas reales de Search Console: ubicación, dirección y Plus Code, Metro, Metrobús, réplica original
+  de Madrid, qué ver cerca y fotografía.
 - Breadcrumb visible (Inicio › Ciudad de México › CDMX › México › Fuente de Cibeles) y mapa de Google con el `src` de embed oficial.
-- Enlaces de autoridad .gob.mx (portal de turismo del Gobierno de la Ciudad de México).
+- Enlaces de autoridad .gob.mx (portal de turismo del Gobierno de la Ciudad de México) en contenido, `#fuentes` y pie.
 - La página se pre-renderiza (`prerender = true`) para que el sitemap incluya `/`.
 - `public/robots.txt` permite el rastreo y apunta al sitemap.
+
+## HTTPS, www y cabeceras
+
+El código no puede forzar el salto de dominio: Cloudflare Workers sirve el Worker antes de evaluar reglas de archivo.
+Configurar **una vez** en el panel de Cloudflare:
+
+1. **SSL/TLS → Edge Certificates → Always Use HTTPS: On** (301 `http://*` → `https://*`).
+2. **SSL/TLS → Edge Certificates → HSTS**: activar con `max-age=31536000; includeSubDomains`.
+3. **Rules → Redirect Rules**: regla `Hostname = www.fuentecibeles.com` → 301 a `https://fuentecibeles.com${path}${query}`.
+
+Las cabeceras de seguridad de las respuestas se aplican en dos frentes:
+
+- `public/_headers` para los activos estáticos servidos desde `assets.directory`.
+- `src/middleware.ts` para las respuestas renderizadas por el Worker (HSTS, nosniff, X-Frame-Options,
+  Referrer-Policy y Permissions-Policy).
 
 ## PWA
 

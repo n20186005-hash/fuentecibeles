@@ -7,6 +7,16 @@ export type Photo = {
   source: string;
 };
 
+/**
+ * Nombre del sitio para SEO (formato «atractivo + ciudad + guía turística»).
+ * Es la única fuente del og:site_name y del sufijo de los títulos de páginas internas.
+ */
+export const SITE_NAME = 'Fuente de Cibeles Ciudad de México — Guía turística';
+
+export function withSiteName(page: string): string {
+  return `${page} | ${SITE_NAME}`;
+}
+
 export const attraction = {
   // Nombres
   name: 'Fuente de Cibeles',
@@ -28,10 +38,11 @@ export const attraction = {
   address: 'Pl. Villa de Madrid, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX, México',
   streetAddress: 'Pl. Villa de Madrid, Roma Nte.',
   postalCode: '06700',
-  latitude: 19.42,
-  longitude: -99.16639,
+  plusCode: 'CRCM+2F Ciudad de México, CDMX, México',
+  latitude: 19.4197,
+  longitude: -99.1664,
   rating: 4.6,
-  reviewCount: 22693,
+  reviewCount: 22741,
 
   // Mapas
   mapUrl: 'https://maps.app.goo.gl/Wc3EJ1uiKpjejoFE9',
@@ -85,7 +96,19 @@ export const photos: [Photo, Photo, Photo, Photo] = [
 export const faqs = [
   {
     q: '¿Dónde está la Fuente de Cibeles?',
-    a: 'Está en la Plaza Villa de Madrid, en la colonia Roma Norte, alcaldía Cuauhtémoc, código postal 06700, en la Ciudad de México, México. Es una réplica de la fuente homónima de Madrid.'
+    a: 'Está en la Plaza Villa de Madrid, colonia Roma Norte, alcaldía Cuauhtémoc, código postal 06700, Ciudad de México (CDMX), México. Es una glorieta a nivel de calle, dentro de uno de los barrios más caminables de la capital.'
+  },
+  {
+    q: '¿Cuál es la dirección exacta de la Fuente de Cibeles?',
+    a: 'Plaza Villa de Madrid, Roma Norte, Cuauhtémoc, 06700 Ciudad de México, CDMX. Si usas un navegador o aplicación de mapas, también funciona el código Plus CRCM+2F (Ciudad de México), que sitúa el punto exacto de la glorieta.'
+  },
+  {
+    q: '¿Cómo llegar a la Fuente de Cibeles en Metro?',
+    a: 'La Línea 1 del Metro es la opción más directa. Desde Insurgentes camina hacia el poniente por Avenida Álvaro Obregón hasta Plaza Río de Janeiro o continúa hacia la glorieta; desde Sevilla el acceso natural es por Avenida Oaxaca. En ambos casos el trayecto final es un paseo de unos 10 a 15 minutos por calles de la Roma.'
+  },
+  {
+    q: '¿Cómo llegar a la Fuente de Cibeles en Metrobús?',
+    a: 'Toma el Metrobús que recorre Avenida de los Insurgentes y baja en la estación Durango. Desde ahí caminas hacia el poniente unas cuadras por Durango hasta la Plaza Villa de Madrid.'
   },
   {
     q: '¿Cuánto cuesta visitar la Fuente de Cibeles?',
@@ -100,12 +123,20 @@ export const faqs = [
     a: 'Reserva de 20 a 40 minutos para la fuente y la glorieta. Si combinas el paseo con Roma Norte, cafés, galerías o Paseo de la Reforma, conviene destinar de dos a cuatro horas.'
   },
   {
-    q: '¿Cuál es el transporte público más práctico?',
-    a: 'Metrobús sobre Avenida Insurgentes (estación Durango) y Metro Línea 1 (Insurgentes o Sevilla) son opciones útiles para llegar caminando a Roma Norte. También hay estaciones de ECOBICI en el entorno inmediato.'
+    q: '¿Cuál es la Fuente de Cibeles original?',
+    a: 'La original es la Fuente de Cibeles de Madrid, concebida por el arquitecto Ventura Rodríguez entre 1777 y 1792, con la diosa y su carro de Francisco Gutiérrez y los leones de Roberto Michel. La escultura que ves en Roma Norte es una réplica de ese conjunto.'
   },
   {
     q: '¿Es la misma fuente que la de Madrid?',
     a: 'No. La de Ciudad de México es una réplica del conjunto madrileño diseñado por Ventura Rodríguez; se inauguró en 1980 como símbolo de los vínculos entre México y España.'
+  },
+  {
+    q: '¿Qué ver cerca de la Fuente de Cibeles?',
+    a: 'Plaza Río de Janeiro y su réplica del David, el camellón de Álvaro Obregón, las cafeterías y galerías de Roma Norte, el Ángel de la Independencia sobre Paseo de la Reforma y el Parque México, en la vecina Condesa.'
+  },
+  {
+    q: '¿Se pueden tomar fotos de la Fuente de Cibeles?',
+    a: 'Sí: es espacio público y no hay restricción de fotografía para uso personal. Procura hacerlo desde la banqueta o los pasos peatonales, sin detenerte en la calzada, porque la glorieta está rodeada de circulación vehicular.'
   },
   {
     q: '¿Se puede visitar con niñas, niños o movilidad reducida?',

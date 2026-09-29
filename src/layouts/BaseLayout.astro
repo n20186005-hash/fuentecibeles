@@ -1,6 +1,6 @@
 ---
 import Logo from '../components/Logo.astro';
-import { attraction } from '../data/site';
+import { attraction, SITE_NAME } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
@@ -32,7 +32,7 @@ const year = new Date().getFullYear();
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={attraction.formalName} />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -46,6 +46,10 @@ const year = new Date().getFullYear();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogAlt} />
+
+    <!-- Rendimiento móvil -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google.com/maps" />
 
     <!-- Icons -->
     <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
@@ -86,8 +90,8 @@ const year = new Date().getFullYear();
         <nav aria-label="Navegación principal">
           <a href="#historia">Historia</a>
           <a href="#visita">Visita</a>
-          <a href="#entorno">Entorno</a>
-          <a href="#fuentes">Fuentes</a>
+          <a href="#como-llegar">Cómo llegar</a>
+          <a href="#fotos">Fotos</a>
           <a href="#faq">FAQ</a>
         </nav>
       </div>
@@ -107,7 +111,8 @@ const year = new Date().getFullYear();
             <a href="#inicio">Inicio</a>
             <a href="#historia">Historia</a>
             <a href="#visita">Cómo visitar</a>
-            <a href="#entorno">Llegar y moverse</a>
+            <a href="#como-llegar">Cómo llegar</a>
+            <a href="#fotos">Fotografías</a>
             <a href="#fuentes">Fuentes</a>
             <a href="#faq">Preguntas frecuentes</a>
           </nav>
@@ -115,6 +120,7 @@ const year = new Date().getFullYear();
             <strong>{attraction.name}</strong>
             <span>{attraction.streetAddress}</span>
             <span>{attraction.borough}, {attraction.postalCode} {attraction.city}, {attraction.regionShort}, México</span>
+            <span>Plus Code: {attraction.plusCode}</span>
             <span>Calificación Google Maps: {attraction.rating} / 5 ({attraction.reviewCount.toLocaleString('es-MX')} reseñas)</span>
             <a class="text-link text-link--light" href={attraction.mapUrl} target="_blank" rel="noopener noreferrer">Abrir en Google Maps →</a>
           </address>

@@ -10,13 +10,16 @@
 
 【类型】Fuente monumental / arte público / atracción urbana
 
-【SEO 标题】Fuente de Cibeles en Roma Norte | Guía de visita, historia y cómo llegar
+【SEO 标题】Fuente de Cibeles CDMX: historia, cómo llegar y mapa
+【站点名称 (SITE_NAME)】Fuente de Cibeles Ciudad de México — Guía turística
 
 【开放时间】Espacio público exterior sin horario de taquilla; acceso normalmente continuo. El funcionamiento ornamental del agua y los accesos inmediatos pueden variar por mantenimiento, obras o eventos.
 
 【门票价格】Gratis; no hay boleto de entrada para contemplar la fuente ni recorrer la Plaza Villa de Madrid.
 
 【地址】Pl. Villa de Madrid, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX, México.
+【Plus Code】CRCM+2F Ciudad de México, CDMX, México（坐标参考 19.4197, -99.1664）
+【评分快照】4.6 / 5（22,741 条 Google Maps 评价）
 
 【交通方式】Metro Línea 1 (Insurgentes o Sevilla) + caminata; Metrobús Línea 1 / estación Durango; ECOBICI en el entorno inmediato; Turibus y Capital Bus utilizan la glorieta como parada o conexión de circuitos.
 
